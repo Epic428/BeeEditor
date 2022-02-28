@@ -3,12 +3,16 @@ package com.teamresourceful.editorbackend.beedata.breeding;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.teamresourceful.editorbackend.beedata.CustomBeeData;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Embeddable
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "breed_data")
 public class BreedData {
@@ -37,9 +41,7 @@ public class BreedData {
     private Integer childGrowthDelay;
     private Integer breedDelay;
 
-    public BreedData() {
-    }
-
+    @Builder
     public BreedData(Set<BeeFamily> parents, String feedItem, String feedReturnItem, Integer feedAmount, Integer childGrowthDelay, Integer breedDelay) {
         this.parents = parents;
         this.feedItem = feedItem;
@@ -48,82 +50,4 @@ public class BreedData {
         this.childGrowthDelay = childGrowthDelay;
         this.breedDelay = breedDelay;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public CustomBeeData getBeeData() {
-        return beeData;
-    }
-
-    public void setBeeData(CustomBeeData beeData) {
-        this.beeData = beeData;
-    }
-
-    public Set<BeeFamily> getParents() {
-        return parents;
-    }
-
-    public void setParents(Set<BeeFamily> parents) {
-        this.parents = parents;
-    }
-
-    public String getFeedItem() {
-        return feedItem;
-    }
-
-    public void setFeedItem(String feedItem) {
-        this.feedItem = feedItem;
-    }
-
-    public String getFeedReturnItem() {
-        return feedReturnItem;
-    }
-
-    public void setFeedReturnItem(String feedReturnItem) {
-        this.feedReturnItem = feedReturnItem;
-    }
-
-    public Integer getFeedAmount() {
-        return feedAmount;
-    }
-
-    public void setFeedAmount(Integer feedAmount) {
-        this.feedAmount = feedAmount;
-    }
-
-    public Integer getChildGrowthDelay() {
-        return childGrowthDelay;
-    }
-
-    public void setChildGrowthDelay(Integer childGrowthDelay) {
-        this.childGrowthDelay = childGrowthDelay;
-    }
-
-    public Integer getBreedDelay() {
-        return breedDelay;
-    }
-
-    public void setBreedDelay(Integer breedDelay) {
-        this.breedDelay = breedDelay;
-    }
-
-    @Override
-    public String toString() {
-        return "BreedData{" +
-                "parents=" + parents +
-                ", feedItem='" + feedItem + '\'' +
-                ", feedReturnItem='" + feedReturnItem + '\'' +
-                ", feedAmount=" + feedAmount +
-                ", childGrowthDelay=" + childGrowthDelay +
-                ", breedDelay=" + breedDelay +
-                '}';
-    }
-
-
 }

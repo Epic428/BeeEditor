@@ -2,10 +2,14 @@ package com.teamresourceful.editorbackend.beedata.mutation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamresourceful.editorbackend.beedata.CustomBeeData;
+import lombok.*;
 
 import javax.persistence.*;
 
-//@Embeddable
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "mutation_data")
 public class MutationData {
@@ -25,42 +29,8 @@ public class MutationData {
 
     //TODO add mutation stuff after determining the json format
 
-
-    public MutationData() {
-    }
-
+    @Builder
     public MutationData(Integer mutationCount) {
         this.mutationCount = mutationCount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public CustomBeeData getBeeData() {
-        return beeData;
-    }
-
-    public void setBeeData(CustomBeeData beeData) {
-        this.beeData = beeData;
-    }
-
-    public Integer getMutationCount() {
-        return mutationCount;
-    }
-
-    public void setMutationCount(Integer mutationCount) {
-        this.mutationCount = mutationCount;
-    }
-
-    @Override
-    public String toString() {
-        return "MutationData{" +
-                "mutationCount=" + mutationCount +
-                '}';
     }
 }

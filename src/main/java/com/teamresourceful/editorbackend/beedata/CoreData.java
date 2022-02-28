@@ -2,6 +2,7 @@ package com.teamresourceful.editorbackend.beedata;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamresourceful.editorbackend.utils.EditorUtils;
+import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -12,7 +13,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-//@Embeddable
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "core_data")
 public class CoreData {
@@ -54,9 +58,7 @@ public class CoreData {
     @CollectionTable(name = "lore", joinColumns = @JoinColumn(name = "bee_id"))
     private List<String> lore = new LinkedList<>();
 
-    public CoreData() {
-    }
-
+    @Builder
     public CoreData(String name, Set<String> flower, String entityFlower, Integer maxTimeInHive, Integer auraRange, List<String> lore) {
         this.name = name;
         this.flower = flower;
@@ -64,83 +66,5 @@ public class CoreData {
         this.maxTimeInHive = maxTimeInHive;
         this.auraRange = auraRange;
         this.lore = lore;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public CustomBeeData getBeeData() {
-        return beeData;
-    }
-
-    public void setBeeData(CustomBeeData beeData) {
-        this.beeData = beeData;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<String> getFlower() {
-        return flower;
-    }
-
-    public void setFlower(Set<String> flower) {
-        this.flower = flower;
-    }
-
-    public String getEntityFlower() {
-        return entityFlower;
-    }
-
-    public void setEntityFlower(String entityFlower) {
-        this.entityFlower = entityFlower;
-    }
-
-    public Integer getMaxTimeInHive() {
-        return maxTimeInHive;
-    }
-
-    public void setMaxTimeInHive(Integer maxTimeInHive) {
-        this.maxTimeInHive = maxTimeInHive;
-    }
-
-    public Integer getAuraRange() {
-        return auraRange;
-    }
-
-    public void setAuraRange(Integer auraRange) {
-        this.auraRange = auraRange;
-    }
-
-    public List<String> getLore() {
-        return lore;
-    }
-
-    public void setLore(List<String> lore) {
-        this.lore = lore;
-    }
-
-    @Override
-    public String toString() {
-        return "CoreData{" +
-                "id=" + id +
-                ", beeData=" + beeData +
-                ", name='" + name + '\'' +
-                ", flower=" + flower +
-                ", entityFlower='" + entityFlower + '\'' +
-                ", maxTimeInHive=" + maxTimeInHive +
-                ", auraRange=" + auraRange +
-                ", lore=" + lore +
-                '}';
     }
 }
