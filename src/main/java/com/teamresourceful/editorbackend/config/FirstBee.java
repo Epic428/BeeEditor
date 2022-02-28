@@ -19,6 +19,8 @@ import java.util.HashSet;
 
 public class FirstBee {
 
+    //TODO remove these after app is finished
+
     public static CustomBeeData generate() {
         CoreData coreData = new CoreData("diamond",
                 new HashSet<>(Arrays.asList("minecraft:stone", "minecraft:diamond_block", "minecraft:cobblestone")),
