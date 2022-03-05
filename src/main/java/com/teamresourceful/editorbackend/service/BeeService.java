@@ -1,11 +1,12 @@
 package com.teamresourceful.editorbackend.service;
 
-import com.teamresourceful.editorbackend.beedata.CustomBeeData;
+import com.teamresourceful.editorbackend.model.beedata.BeeData;
 import com.teamresourceful.editorbackend.repository.BeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 //Service Layer
 @Service //
@@ -17,28 +18,29 @@ public class BeeService {
         this.beeRepository = beeRepository;
     }
 
-    public List<CustomBeeData> getBees() {
+    public List<BeeData> getBees() {
         return beeRepository.findAll();
     }
 
-    public CustomBeeData getBee(Long id) {
+    public BeeData getBee(UUID id) {
         return beeRepository.findById(id).orElseThrow(() -> new IllegalStateException("Bee with ID " + id + " does not exist!"));
     }
 
-    public void addNewBee(CustomBeeData bee) {
-/*        Optional<CustomBeeData> studentOptional = beeRepository.findStudentByEmail(student.getEmail());
-        if (studentOptional.isPresent()) {
-            throw new IllegalStateException("email taken");
-        }
-        beeRepository.save(student);*/
+    public BeeData addNewBee(BeeData bee) {
+        bee.getCoreData().setBeeData(bee);
+        bee.getRenderData().setBeeData(bee);
+        return beeRepository.save(bee);
     }
 
     public void deleteBee(Long beeId) {
-        boolean exists = beeRepository.existsById(beeId);
-        if(!exists) {
+        if (!beeRepository.existsById(beeId)) {
             throw new IllegalStateException("Bee with ID " + beeId + " does not exist!");
         }
         beeRepository.deleteById(beeId);
+    }
+
+    public static BeeData update(Long bee_id, BeeData beeData) {
+        return beeData;
     }
 
 /*    @Transactional

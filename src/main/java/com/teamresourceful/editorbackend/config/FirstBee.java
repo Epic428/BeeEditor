@@ -1,16 +1,17 @@
 package com.teamresourceful.editorbackend.config;
 
-import com.teamresourceful.editorbackend.beedata.CoreData;
-import com.teamresourceful.editorbackend.beedata.CustomBeeData;
-import com.teamresourceful.editorbackend.beedata.breeding.BeeFamily;
-import com.teamresourceful.editorbackend.beedata.breeding.BreedData;
-import com.teamresourceful.editorbackend.beedata.combat.CombatData;
-import com.teamresourceful.editorbackend.beedata.mutation.MutationData;
-import com.teamresourceful.editorbackend.beedata.render.ColorData;
-import com.teamresourceful.editorbackend.beedata.render.LayerData;
-import com.teamresourceful.editorbackend.beedata.render.RenderData;
-import com.teamresourceful.editorbackend.beedata.spawning.SpawnData;
-import com.teamresourceful.editorbackend.beedata.trait.TraitData;
+import com.teamresourceful.editorbackend.model.ItemStack;
+import com.teamresourceful.editorbackend.model.beedata.CoreData;
+import com.teamresourceful.editorbackend.model.beedata.BeeData;
+import com.teamresourceful.editorbackend.model.beedata.breeding.BeeFamily;
+import com.teamresourceful.editorbackend.model.beedata.breeding.BreedData;
+import com.teamresourceful.editorbackend.model.beedata.combat.CombatData;
+import com.teamresourceful.editorbackend.model.beedata.mutation.MutationData;
+import com.teamresourceful.editorbackend.model.beedata.render.ColorData;
+import com.teamresourceful.editorbackend.model.beedata.render.LayerData;
+import com.teamresourceful.editorbackend.model.beedata.render.RenderData;
+import com.teamresourceful.editorbackend.model.beedata.spawning.SpawnData;
+import com.teamresourceful.editorbackend.model.beedata.trait.TraitData;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class FirstBee {
 
     //TODO remove these after app is finished
 
-    public static CustomBeeData generate() {
+    public static BeeData generate() {
         CoreData coreData = new CoreData("diamond",
                 new HashSet<>(Arrays.asList("minecraft:stone", "minecraft:diamond_block", "minecraft:cobblestone")),
                 null,
@@ -44,14 +45,14 @@ public class FirstBee {
                         new BeeFamily(new BigDecimal(3), BigDecimal.valueOf(3), "coal", "stone"),
                         new BeeFamily(new BigDecimal(10), BigDecimal.valueOf(.6), "emerald", "diamond")
                 )),
-                "minecraft:poppy",
-                "minecraft:bucket",
+                Collections.singleton("minecraft:poppy"),
+                new ItemStack("minecraft:bucket", 1, null),
                 2,
                 2000,
                 200
         );
 
-        CombatData combatData = new CombatData(false, 2d, true, true, 20d, 2d, 4d, null, false);
+        CombatData combatData = new CombatData(false, new BigDecimal(2), true, true, new BigDecimal(20), new BigDecimal(2), new BigDecimal(4), null, false);
 
         MutationData mutationData = new MutationData(10);
 
@@ -64,7 +65,8 @@ public class FirstBee {
         //spawn
         //trait
 
-        CustomBeeData firstBee = new CustomBeeData(1L,
+        BeeData firstBee = new BeeData(
+                "1.0.0",
                 coreData,
                 "diamond",
                 renderData,
