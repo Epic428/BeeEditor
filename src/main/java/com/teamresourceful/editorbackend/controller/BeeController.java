@@ -6,8 +6,10 @@ import com.teamresourceful.editorbackend.service.BeeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -41,14 +43,12 @@ public class BeeController {
         return beeService.getBee(beeId);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    @PostMapping(path = "/create")
-    public BeeDataDto addNewBee(@RequestBody BeeDataDto beeDataDto) {
-        return convertToDto(beeService.addNewBee(convertToEntity(beeDataDto)));
+    @PostMapping("/create")
+    public ResponseEntity<BeeDataDto> addNewBee(@Valid @RequestBody BeeDataDto beeDataDto) {
+        return new ResponseEntity<>(convertToDto(beeService.addNewBee(convertToEntity(beeDataDto))), HttpStatus.CREATED);
     }
 
-    @DeleteMapping(path = "{beeId}")
+    @DeleteMapping(path = "/delete/{beeId}")
     public void deleteBee(@PathVariable("beeId") Long beeId) {
         beeService.deleteBee(beeId);
     }

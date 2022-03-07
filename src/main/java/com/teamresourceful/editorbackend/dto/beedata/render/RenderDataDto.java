@@ -3,6 +3,7 @@ package com.teamresourceful.editorbackend.dto.beedata.render;
 import com.teamresourceful.editorbackend.utils.EditorUtils;
 import lombok.Data;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -11,8 +12,9 @@ import java.util.Set;
 @Data
 public class RenderDataDto implements Serializable {
     @NotNull(message = "Layer data is required!")
-    private Set<LayerDataDto> layerData;
+    private Set<@Valid LayerDataDto> layerData;
     @NotNull(message = "Color data is required!")
+    @Valid
     private ColorDataDto colorData;
     @NotNull(message = "Model is required!")
     @Pattern(message = EditorUtils.RL_ERROR_MSG, regexp = EditorUtils.RESOURCE_LOCATION)

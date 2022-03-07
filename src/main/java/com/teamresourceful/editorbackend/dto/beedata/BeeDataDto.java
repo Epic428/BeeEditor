@@ -9,6 +9,7 @@ import com.teamresourceful.editorbackend.dto.beedata.trait.TraitDataDto;
 import lombok.Data;
 
 import javax.persistence.Id;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
@@ -19,14 +20,21 @@ public class BeeDataDto implements Serializable {
     private UUID id;
     @NotNull
     private String jsonVersion;
+    @Valid
     @NotNull
     private CoreDataDto coreData;
     private String honeycombVariation;
+    @Valid
     @NotNull
     private RenderDataDto renderData;
+    @Valid
     private BreedDataDto breedData;
+    @Valid
     private CombatDataDto combatData;
+    @Valid
     private MutationDataDto mutationData;
+    @Valid
     private SpawnDataDto spawnData;
+    @Valid
     private TraitDataDto traitData;
 }
